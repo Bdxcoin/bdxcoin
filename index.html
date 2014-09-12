@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    <link rel="icon" href="img/favicon.ico" type="image/png">
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<title>BdxCoin</title>
+
+
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,900,700,100' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+		<!--[if lt IE 9]>
+			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<link href="css/styles.css" rel="stylesheet">
+
+
+	</head>
+	<body>
+    <div >
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">BdxCoin</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Talk</a></li>
+        <li><a href="#">About</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+</div>
+<div class="talk">
+  <p id="title"></p>
+  <p id="date"></p>
+  <p><a class="btn btn-primary btn-lg" id="subscribeBtn" role="button">Inscrivez vous !</a></p>
+</div>
+<div class="about container-fluid">
+  <div class="row">
+    <div class="objective col-md-offset-1 col-md-4">
+      <h3 id="title">Qu'est-ce que le Bdxcoin ?</h3>
+      <p >Le BdxCoin est un regroupement d’utilisateurs des différentes monnaies virtuelles telles que le Bitcoin,
+        Litecoin et autre Dogecoin. Ce Meetup a pour but de réunir toutes les facettes de ce phénomène.
+        Tous mois nous partagerons autour du mining, trading et de l’utilisation commerciale de ces nouvelles monnaies.
+         Nous essaierons de proposer chaque mois de nouveaux talks et un moment pour discuter autour d'un verre !</p>
+    </div>
+    <div class="team col-md-offset-1 col-md-4">
+      <h3 id="title">Nos partenaires !</h3>
+      <a href="http://le-coin-coin.fr/"><img src="http://le-coin-coin.fr/wp-content/uploads/2014/04/logoretetes.png"></a>
+    </div>
+  </div>
+</div>
+<div class="footer" align="center">
+  <a href="https://twitter.com/bdxcoin"><i class="fa fa-twitter fa-5x social"></i></a>
+  <a href="https://www.facebook.com/bdxcoin"><i class="fa fa-facebook fa-5x social "></i></a>
+</div>
+
+	<!-- script references -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.2/moment.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.2/locales.js"></script>
+  <script>
+  var url = "http://api.meetup.com/2/events?status=upcoming&order=time&limited_events=False&group_urlname=BdxCoin&desc=false&offset=0&format=json&page=200&fields=&sig_id=36222302&sig=7740ef0736d8eb16b6f60268d6e2336b9b109e15&callback=?"
+  $.getJSON( url, function( data ) {
+    var o = data.results;
+    var date = moment(new Date(o[0].time));
+    console.log(o[0].name+','+date+o[0].description);
+    $('#title').text(o[0].name);
+    $('#date').text(date.lang('fr').format('dddd Do MMMM YYYY'));
+    // $('.top p').text(o[0].description);
+    $('#subscribeBtn').attr("href",o[0].event_url);
+
+  });
+  </script>
+	</body>
+</html>

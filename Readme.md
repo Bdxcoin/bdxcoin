@@ -1,1 +1,2 @@
-SPA for the BdxCoin website
+BdxCoin SPA website
+===================
