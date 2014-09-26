@@ -34,10 +34,11 @@
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Talk</a></li>
-        <li><a href="#">About</a></li>
+        <li><a href="#about">About</a></li>
+				<li><a href="#projects">Projects</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -48,20 +49,34 @@
   <p id="date"></p>
   <p><a class="btn btn-primary btn-lg" id="subscribeBtn" role="button">Inscrivez vous !</a></p>
 </div>
-<div class="about container-fluid">
+<div class="about container-fluid" id="about">
   <div class="row">
-    <div class="objective col-md-offset-1 col-md-4">
+    <div class="objective col-md-offset-1 col-md-4" id="objective">
       <h3 id="title">Qu'est-ce que le Bdxcoin ?</h3>
-      <p >Le BdxCoin est un regroupement d’utilisateurs des différentes monnaies virtuelles telles que le Bitcoin,
+      <p >Le BdxCoin est un regroupement d’utilisateurs des différentes monnaies virtuelles telles que le <a href="https://bitcoin.org/">Bitcoin</a>,
         Litecoin et autre Dogecoin. Ce Meetup a pour but de réunir toutes les facettes de ce phénomène.
         Tous mois nous partagerons autour du mining, trading et de l’utilisation commerciale de ces nouvelles monnaies.
          Nous essaierons de proposer chaque mois de nouveaux talks et un moment pour discuter autour d'un verre !</p>
     </div>
-    <div class="team col-md-offset-1 col-md-4">
+    <div class="team col-md-offset-1 col-md-4" id="team">
       <h3 id="title">Nos partenaires !</h3>
-      <a href="http://le-coin-coin.fr/"><img src="http://le-coin-coin.fr/wp-content/uploads/2014/04/logoretetes.png"></a>
+      	<div class="row">
+				<div class="col-md-5"><a href="http://le-coin-coin.fr/"><img height=113 width=200 src="../img/logocoincoinbig.png"></a></div>
+				<div class="col-md-2"></div>
+				<div class="col-md-5"><a href="http://www.bitcoinomie.fr/"><img height=113 width=200 src="../img/Bitcoinomie.png"></a></div>
+			</div>
     </div>
   </div>
+	<div class="row">
+		<div class="projects col-md-offset-1 col-md-11" id="projects">
+		<h3 id="title">Nos projets !</h3>
+				<div class="col-md-6">
+					<div class="github-card" data-github="Bdxcoin/bdxcoin" data-width="400" data-height=""></div>
+				</div>
+				<div class="col-md-6">
+					<div class="github-card" data-github="Bdxcoin/coingaming" data-width="400" data-height=""></div>
+			</div>
+		</div>
 </div>
 <div class="footer" align="center">
   <a href="https://twitter.com/bdxcoin"><i class="fa fa-twitter fa-5x social"></i></a>
@@ -69,6 +84,7 @@
 </div>
 
 	<!-- script references -->
+	<script src="http://lab.lepture.com/github-cards/widget.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.2/moment.js"></script>
@@ -76,13 +92,18 @@
   <script>
   var url = "http://api.meetup.com/2/events?status=upcoming&order=time&limited_events=False&group_urlname=BdxCoin&desc=false&offset=0&format=json&page=200&fields=&sig_id=36222302&sig=7740ef0736d8eb16b6f60268d6e2336b9b109e15&callback=?"
   $.getJSON( url, function( data ) {
-    var o = data.results;
-    var date = moment(new Date(o[0].time));
-    console.log(o[0].name+','+date+o[0].description);
-    $('#title').text(o[0].name);
-    $('#date').text(date.lang('fr').format('dddd Do MMMM YYYY'));
-    // $('.top p').text(o[0].description);
-    $('#subscribeBtn').attr("href",o[0].event_url);
+		if(data.results >0){
+				var o = data.results;
+				var date = moment(new Date(o[0].time));
+				$('#title').text(o[0].name);
+				$('#date').text(date.lang('fr').format('dddd Do MMMM YYYY'));
+				$('#subscribeBtn').attr("href",o[0].event_url);
+		}else{
+			$('#title').text('Un prochain Meetup très bientôt !')
+			$('#subscribeBtn').attr("href",'http://www.meetup.com/BdxCoin/')
+			$('#subscribeBtn').text('Inscrivez vous au groupe !')
+		}
+
 
   });
   </script>
