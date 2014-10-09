@@ -92,13 +92,14 @@
   <script>
   var url = "http://api.meetup.com/2/events?status=upcoming&order=time&limited_events=False&group_urlname=BdxCoin&desc=false&offset=0&format=json&page=200&fields=&sig_id=36222302&sig=7740ef0736d8eb16b6f60268d6e2336b9b109e15&callback=?"
   $.getJSON( url, function( data ) {
-		if(data.results >0){
+		if(data.results){
 				var o = data.results;
 				var date = moment(new Date(o[0].time));
 				$('#title').text(o[0].name);
 				$('#date').text(date.lang('fr').format('dddd Do MMMM YYYY'));
 				$('#subscribeBtn').attr("href",o[0].event_url);
 		}else{
+			console.log(data);
 			$('#title').text('Un prochain Meetup très bientôt !')
 			$('#subscribeBtn').attr("href",'http://www.meetup.com/BdxCoin/')
 			$('#subscribeBtn').text('Inscrivez vous au groupe !')
